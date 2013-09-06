@@ -56,8 +56,11 @@ class Job extends BaseJob
             $errorFile = trim($errorFile);
         }
 
-        // extract log file
-        if (strpos($command, '>')) {
+        // extract (append to) log file
+        if (strpos($command, '>>')) {
+            list($command, $logFile) = explode('>>', $command);
+            $logFile = trim($logFile);
+        } elseif (strpos($command, '>')) { // extract log file
             list($command, $logFile) = explode('>', $command);
             $logFile = trim($logFile);
         }
